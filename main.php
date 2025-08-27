@@ -3,48 +3,11 @@
 <head>
     <title>Grade Calculator</title>
     <style>
-        body {
-            font-family: Arial;
-            margin: 20px;
-        }
-        .container {
-            width: 400px;
-            margin: 0 auto;
-            padding: 20px;
-            border: 1px solid #000;
-        }
-        h1 {
-            text-align: center;
-            margin-top: 0;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        input[type="number"] {
-            width: 100%;
-            padding: 5px;
-            box-sizing: border-box;
-        }
-        button {
-            width: 100%;
-            padding: 8px;
-            background: #ddd;
-            border: 1px solid #000;
-            cursor: pointer;
-        }
-        .result {
-            margin-top: 20px;
-            padding: 10px;
-            border: 1px solid #000;
-        }
-        .error {
-            color: red;
-            margin-top: 10px;
-        }
+        /* copy paste sa module sir */
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .calculator { border: 2px solid #ccc; padding: 20px; width: 300px; }
+        input, select, button { margin: 5px; padding: 5px; }
+        .result { font-weight: bold; color: #333; }
     </style>
 </head>
 <body>
@@ -52,20 +15,24 @@
         <h1>Grade Calculator</h1>
         <p>Weights: Quiz (30%), Assignment (30%), Exam (40%)</p>
         
+        <!-- dito na yung mga mag didisplay -->
         <form method="POST">
             <div class="form-group">
+                <!-- quizz -->
                 <label for="quiz">Quiz Score (0-100):</label>
                 <input type="number" id="quiz" name="quiz" min="0" max="100" step="0.01" required 
                        value="<?php echo isset($_POST['quiz']) ? $_POST['quiz'] : ''; ?>">
             </div>
             
             <div class="form-group">
+                <!-- assignment -->
                 <label for="assignment">Assignment Score (0-100):</label>
                 <input type="number" id="assignment" name="assignment" min="0" max="100" step="0.01" required 
                        value="<?php echo isset($_POST['assignment']) ? $_POST['assignment'] : ''; ?>">
             </div>
             
             <div class="form-group">
+                <!-- exam -->
                 <label for="exam">Exam Score (0-100):</label>
                 <input type="number" id="exam" name="exam" min="0" max="100" step="0.01" required 
                        value="<?php echo isset($_POST['exam']) ? $_POST['exam'] : ''; ?>">
@@ -75,6 +42,7 @@
         </form>
         
         <?php
+        // dito yung mga calculations pag tapos mag input sa taas
         if (isset($_POST['calculate'])) {
             $quiz = $_POST['quiz'];
             $assignment = $_POST['assignment'];
@@ -83,13 +51,13 @@
             $error = "";
             
             if (!is_numeric($quiz) || $quiz < 0 || $quiz > 100) {
-                $error = "Quiz score must be a number between 0 and 100.";
+                $error = "quiz 0 to 100.";
             }
             elseif (!is_numeric($assignment) || $assignment < 0 || $assignment > 100) {
-                $error = "Assignment score must be a number between 0 and 100.";
+                $error = "assignment 0 to 100.";
             }
             elseif (!is_numeric($exam) || $exam < 0 || $exam > 100) {
-                $error = "Exam score must be a number between 0 and 100.";
+                $error = "exam 0 to 100.";
             }
             
             if (empty($error)) {
